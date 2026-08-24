@@ -1,0 +1,7 @@
+data/store.json
+data/*.tmp
+data/*.bak
+data/backups/
+.env
+node_modules/
+npm-debug.log*

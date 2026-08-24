@@ -1,0 +1,23 @@
+{
+  "name": "nile-auto-parts-stock-management",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Ethiopia-ready stock, sales, purchasing and payment management for auto spare-parts businesses.",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "check": "node --check server.mjs && node --check public/app.js",
+    "test": "node --test test/api.test.mjs",
+    "db:check": "node scripts/postgres-check.mjs",
+    "db:migrate": "node scripts/migrate-to-postgres.mjs",
+    "backup": "node scripts/backup.mjs",
+    "backup:restore": "node scripts/restore.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}

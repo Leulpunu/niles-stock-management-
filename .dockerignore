@@ -1,0 +1,7 @@
+.git
+.test-data
+data
+node_modules
+npm-debug.log
+*.backup.json
+visual-*.png

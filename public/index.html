@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123a32">
+  <meta name="description" content="Nile Auto Parts stock, sales and payment management">
+  <title>Nile Stock — Auto Parts Management</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <section id="login-screen" class="login-screen">
+    <div class="login-story">
+      <div class="login-brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 42 42"><path d="M8 29c5-2 6-9 12-14 5-5 9-6 14-7-4 5-5 10-3 15 2 4 1 8-3 11-4 3-10 2-14 0"/><path d="M10 31c7 1 12-1 16-6"/></svg>
+        </div>
+        <span>Nile Stock</span>
+      </div>
+      <div class="story-copy">
+        <span class="eyebrow light">Built for Ethiopian auto parts businesses</span>
+        <h1>Every part accounted for. Every sale moving you forward.</h1>
+        <p>Inventory, purchases, customers and payments in one calm, reliable workspace.</p>
+      </div>
+      <div class="story-stats">
+        <div><strong>ETB</strong><span>Local currency</span></div>
+        <div><strong>15%</strong><span>Configurable VAT</span></div>
+        <div><strong>6+</strong><span>Payment methods</span></div>
+      </div>
+      <div class="road-art" aria-hidden="true"><span></span><span></span><span></span></div>
+    </div>
+    <div class="login-panel">
+      <form id="login-form" class="login-card">
+        <div class="mobile-login-brand">
+          <div class="brand-mark"><svg viewBox="0 0 42 42"><path d="M8 29c5-2 6-9 12-14 5-5 9-6 14-7-4 5-5 10-3 15 2 4 1 8-3 11-4 3-10 2-14 0"/><path d="M10 31c7 1 12-1 16-6"/></svg></div>
+          <span>Nile Stock</span>
+        </div>
+        <span class="eyebrow">Welcome back</span>
+        <h2>Sign in to your store</h2>
+        <p class="muted">Enter your work account to continue.</p>
+        <label class="field">
+          <span>Email address</span>
+          <span class="input-wrap"><i data-icon="mail"></i><input id="login-email" type="email" value="admin@nile.et" autocomplete="username" required></span>
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <span class="input-wrap"><i data-icon="lock"></i><input id="login-password" type="password" value="admin123" autocomplete="current-password" required><button class="icon-btn password-toggle" type="button" aria-label="Show password" data-icon-button="eye"></button></span>
+        </label>
+        <div id="login-error" class="form-error" role="alert"></div>
+        <button class="button primary wide login-submit" type="submit"><span>Sign in</span><i data-icon="arrow-right"></i></button>
+        <div class="demo-note"><i data-icon="sparkles"></i><div><strong>Demo access</strong><span>Admin: admin@nile.et / admin123<br>Cashier: cashier@nile.et / cashier123</span></div></div>
+        <p class="copyright">© 2026 Nile Stock · የንግድዎ እድገት አጋር</p>
+      </form>
+    </div>
+  </section>
+
+  <div id="app" class="app hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark"><svg viewBox="0 0 42 42"><path d="M8 29c5-2 6-9 12-14 5-5 9-6 14-7-4 5-5 10-3 15 2 4 1 8-3 11-4 3-10 2-14 0"/><path d="M10 31c7 1 12-1 16-6"/></svg></div>
+        <div><strong>Nile Stock</strong><small>ናይል ስቶክ</small></div>
+      </div>
+      <nav id="main-nav" class="main-nav" aria-label="Main navigation"></nav>
+      <div class="sidebar-help">
+        <div class="help-icon"><i data-icon="headphones"></i></div>
+        <strong>Need a hand?</strong>
+        <span>Support is available</span>
+        <a href="tel:+251911234567">+251 911 234 567</a>
+      </div>
+      <div id="sidebar-user" class="sidebar-user"></div>
+    </aside>
+    <button id="sidebar-overlay" class="sidebar-overlay" aria-label="Close navigation"></button>
+
+    <section class="workspace">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="menu-toggle" class="icon-btn mobile-menu" aria-label="Open navigation" data-icon-button="menu"></button>
+          <div><h1 id="page-title">Dashboard</h1><p id="page-subtitle">Here’s what’s happening in your store today.</p></div>
+        </div>
+        <div class="topbar-actions">
+          <label class="branch-switch" title="Active branch"><i data-icon="pin"></i><select id="branch-selector" aria-label="Active branch"></select></label>
+          <button id="global-search-button" class="global-search"><i data-icon="search"></i><span>Search products, invoices...</span><kbd>Ctrl K</kbd></button>
+          <button id="notification-button" class="icon-btn notification" aria-label="Stock alerts" data-icon-button="bell"><span id="alert-dot" class="alert-dot"></span></button>
+          <button id="quick-sale-button" class="button primary"><i data-icon="plus"></i><span>New sale</span></button>
+        </div>
+      </header>
+      <main id="page-content" class="page-content" tabindex="-1"></main>
+    </section>
+  </div>
+
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+  <div id="command-root"></div>
+  <div id="print-root"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
