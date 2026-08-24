@@ -2,6 +2,12 @@
 
 Use this checklist before entering real stock, customer, or payment data.
 
+## cPanel / CloudLinux Passenger
+
+Clone this repository into a directory outside `public_html`, such as `nile-stock`. In **Setup Node.js App** or **Application Manager**, select Node.js 20 or newer, Production mode, the repository directory as the application root, and `app.js` as the startup file. Do not set `PORT`; Passenger supplies it. Run **NPM Install**, add the environment variables below, and restart the application.
+
+If neither **Setup Node.js App** nor **Application Manager** is available, the hosting plan cannot run this Node application. If **PostgreSQL Databases** is missing, use an external managed PostgreSQL database or request PostgreSQL from the hosting provider.
+
 ## 1. Provision PostgreSQL
 
 Create a dedicated database and user, then set `DATABASE_URL`. For a managed database that requires TLS, also set `DATABASE_SSL=true`. Import the current local datastore once with:

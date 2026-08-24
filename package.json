@@ -2,7 +2,6 @@
   "name": "nile-auto-parts-stock-management",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "description": "Ethiopia-ready stock, sales, purchasing and payment management for auto spare-parts businesses.",
   "scripts": {
     "start": "node server.mjs",
