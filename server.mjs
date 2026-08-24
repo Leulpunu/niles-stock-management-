@@ -24,6 +24,7 @@ const CHAPA_SECRET_KEY = process.env.CHAPA_SECRET_KEY || '';
 const DATABASE_URL = process.env.DATABASE_URL || '';
 const DATABASE_SSL = process.env.DATABASE_SSL === 'true';
 const DATABASE_SSL_REJECT_UNAUTHORIZED = process.env.DATABASE_SSL_REJECT_UNAUTHORIZED !== 'false';
+const POSTGRES_ADVISORY_LOCK_KEY = 73120427;
 const SESSION_TTL = 1000 * 60 * 60 * 12;
 const SESSION_ABSOLUTE_TTL = 1000 * 60 * 60 * 24;
 const sessions = new Map();
@@ -204,7 +205,7 @@ async function loadStore() {
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )`);
     postgresLockClient = await postgresPool.connect();
-    const lock = await postgresLockClient.query('SELECT pg_try_advisory_lock($1) AS acquired', [73120426]);
+    const lock = await postgresLockClient.query('SELECT pg_try_advisory_lock($1) AS acquired', [POSTGRES_ADVISORY_LOCK_KEY]);
     if (!lock.rows[0].acquired) fail(503, 'Another Nile Stock server is already connected to this database.');
     const result = await postgresPool.query('SELECT state FROM nile_app_state WHERE id = 1');
     if (result.rows.length) store = result.rows[0].state;
@@ -1134,8 +1135,9 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-server.listen(PORT, HOST, () => {
-  console.log(`Nile Auto Parts is running at http://${HOST}:${PORT}`);
+const passengerMode = typeof globalThis.PhusionPassenger !== 'undefined';
+server.listen(passengerMode ? 'passenger' : PORT, ...(passengerMode ? [] : [HOST]), () => {
+  console.log(passengerMode ? 'Nile Auto Parts is running through Passenger' : `Nile Auto Parts is running at http://${HOST}:${PORT}`);
   console.log('Demo admin: admin@nile.et / admin123');
 });
 
@@ -1143,7 +1145,7 @@ function shutdown() {
   server.close(async () => {
     try {
       if (backupTimer) clearInterval(backupTimer);
-      if (postgresLockClient) { await postgresLockClient.query('SELECT pg_advisory_unlock($1)', [73120426]); postgresLockClient.release(); }
+      if (postgresLockClient) { await postgresLockClient.query('SELECT pg_advisory_unlock($1)', [POSTGRES_ADVISORY_LOCK_KEY]); postgresLockClient.release(); }
       if (postgresPool) await postgresPool.end();
     } finally { process.exit(0); }
   });
